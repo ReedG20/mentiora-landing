@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Marquee } from "@/components/ui/marquee";
 import { Slider } from "@/components/ui/slider";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -13,6 +12,19 @@ import {
   ChartUpIcon,
   ArrowUpRight01Icon,
   ArrowRight02Icon,
+  Dna01Icon,
+  Chemistry01Icon,
+  AtomIcon,
+  CalculatorIcon,
+  TextIcon,
+  ComputerIcon,
+  GlobeIcon,
+  ClockIcon,
+  Brain02Icon,
+  BriefcaseIcon,
+  BookIcon,
+  Atom02Icon,
+  Quran01Icon
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
@@ -84,20 +96,20 @@ const cardAnimation: Variants = {
 };
 
 const subjects = [
-  { name: "Biology" },
-  { name: "Chemistry" },
-  { name: "Physics" },
-  { name: "Maths" },
-  { name: "English Language" },
-  { name: "English Literature" },
-  { name: "Computer Science" },
-  { name: "Geography" },
-  { name: "History" },
-  { name: "Psychology" },
-  { name: "Business" },
-  { name: "Religious Studies" },
-  { name: "Combined Science" },
-  { name: "Spanish" },
+  { name: "Biology", icon: Dna01Icon },
+  { name: "Chemistry", icon: Chemistry01Icon },
+  { name: "Physics", icon: AtomIcon },
+  { name: "Maths", icon: CalculatorIcon },
+  { name: "English Language", icon: TextIcon },
+  { name: "English Literature", icon: BookIcon },
+  { name: "Computer Science", icon: ComputerIcon },
+  { name: "Geography", icon: GlobeIcon },
+  { name: "History", icon: ClockIcon },
+  { name: "Psychology", icon: Brain02Icon },
+  { name: "Business", icon: BriefcaseIcon },
+  { name: "Religious Studies", icon: Quran01Icon },
+  { name: "Combined Science", icon: Atom02Icon },
+  { name: "Spanish", icon: TextIcon },
 ];
 
 const examBoards = [
@@ -564,7 +576,7 @@ export default function Home() {
               </motion.p>
             </motion.div>
             <motion.div 
-              className="grid md:grid-cols-2 gap-12"
+              className="flex flex-col gap-12"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
@@ -595,18 +607,23 @@ export default function Home() {
                   subjects available
                 </h3>
                 <motion.div 
-                  className="flex flex-wrap gap-2"
+                  className="flex flex-wrap gap-4"
                   variants={staggerContainer}
                 >
                   {subjects.map((subject, index) => (
                     <motion.div 
                       key={subject.name} 
-                      variants={wordAnimation}
+                      variants={cardAnimation}
                       custom={index}
                     >
-                      <Badge variant="secondary">
-                        {subject.name}
-                      </Badge>
+                      <Card className="px-6 py-4 min-w-[140px]">
+                        <div className="flex flex-col items-center gap-3">
+                          <HugeiconsIcon icon={subject.icon} className="size-6" />
+                          <div className="font-semibold text-base text-center">
+                            {subject.name}
+                          </div>
+                        </div>
+                      </Card>
                     </motion.div>
                   ))}
                 </motion.div>
