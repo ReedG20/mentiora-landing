@@ -25,6 +25,7 @@ interface HighlighterProps {
   padding?: number
   multiline?: boolean
   isView?: boolean
+  delay?: number
 }
 
 export function Highlighter({
@@ -37,6 +38,7 @@ export function Highlighter({
   padding = 2,
   multiline = true,
   isView = false,
+  delay = 0,
 }: HighlighterProps) {
   const elementRef = useRef<HTMLSpanElement>(null)
   const annotationRef = useRef<RoughAnnotation | null>(null)
@@ -55,37 +57,54 @@ export function Highlighter({
     const element = elementRef.current
     if (!element) return
 
-    const annotationConfig = {
-      type: action,
-      color,
-      strokeWidth,
-      animationDuration,
-      iterations,
-      padding,
-      multiline,
+    let resizeObserver: ResizeObserver | null = null
+
+    const showAnnotation = () => {
+      if (!element) return
+
+      const annotationConfig = {
+        type: action,
+        color,
+        strokeWidth,
+        animationDuration,
+        iterations,
+        padding,
+        multiline,
+      }
+
+      const annotation = annotate(element, annotationConfig)
+
+      annotationRef.current = annotation
+      annotationRef.current.show()
+
+      resizeObserver = new ResizeObserver(() => {
+        annotation.hide()
+        annotation.show()
+      })
+
+      resizeObserver.observe(element)
+      resizeObserver.observe(document.body)
     }
 
-    const annotation = annotate(element, annotationConfig)
+    // If there's a delay, wait before showing the annotation
+    const timeoutId = delay > 0 ? setTimeout(showAnnotation, delay) : null
 
-    annotationRef.current = annotation
-    annotationRef.current.show()
-
-    const resizeObserver = new ResizeObserver(() => {
-      annotation.hide()
-      annotation.show()
-    })
-
-    resizeObserver.observe(element)
-    resizeObserver.observe(document.body)
+    if (delay === 0) {
+      showAnnotation()
+    }
 
     return () => {
+      if (timeoutId) clearTimeout(timeoutId)
       if (element) {
         annotate(element, { type: action }).remove()
+      }
+      if (resizeObserver) {
         resizeObserver.disconnect()
       }
     }
   }, [
     shouldShow,
+    delay,
     action,
     color,
     strokeWidth,

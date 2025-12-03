@@ -15,10 +15,73 @@ import {
   ArrowRight02Icon,
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Highlighter } from "@/components/ui/highlighter";
 import Logo from "@/components/ui/logo";
 import UnicornScene from "unicornstudio-react";
+
+// Animation variants
+const fadeInUp: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 24,
+    filter: "blur(8px)"
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.4, 0.25, 1]
+    }
+  }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const wordAnimation: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    filter: "blur(8px)"
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.4, 0.25, 1]
+    }
+  }
+};
+
+const cardAnimation: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 32,
+    filter: "blur(8px)"
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.4, 0.25, 1]
+    }
+  }
+};
 
 const subjects = [
   { name: "Biology" },
@@ -273,43 +336,81 @@ export default function Home() {
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[80px] bg-white z-10" />
           </div>
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              your revision,<br />
-              finally made{" "}
-              <Highlighter action="highlight" color="#FF99D9" isView>
-                <em>personal</em>
-              </Highlighter>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+            >
+              {["your ", "revision,"].map((word, i) => (
+                <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                  {word}
+                </motion.span>
+              ))}
+              <br />
+              {["finally ", "made "].map((word, i) => (
+                <motion.span key={i + 2} variants={wordAnimation} className="inline-block whitespace-pre">
+                  {word}
+                </motion.span>
+              ))}
+              <motion.span variants={wordAnimation} className="inline-block">
+                <Highlighter action="highlight" color="#FF99D9" isView delay={900}>
+                  <em>personal</em>
+                </Highlighter>
+              </motion.span>
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-muted-foreground mb-8"
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              transition={{ delay: 0.5 }}
+            >
               Personalised GCSE & A-Level revision<br />
               built to help you reach your best results.
-            </p>
-            <Button ref={heroCtaRef} size="xl" className="px-6">
-              Try now for free
-              <motion.span
-                animate={{
-                  x: [0, 3, 0],
-                  y: [0, -3, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
-              </motion.span>
-            </Button>
+            </motion.p>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              transition={{ delay: 0.7 }}
+            >
+              <Button ref={heroCtaRef} size="xl" className="px-6">
+                Try now for free
+                <motion.span
+                  animate={{
+                    x: [0, 3, 0],
+                    y: [0, -3, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                </motion.span>
+              </Button>
+            </motion.div>
           </div>
         </section>
 
         {/* Social Proof */}
-        <section className="py-12 px-4">
+        <motion.section 
+          className="py-12 px-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
           <div className="container mx-auto">
-            <p className="text-center text-muted-foreground mb-6">
+            <motion.p 
+              className="text-center text-muted-foreground mb-6"
+              variants={fadeInUp}
+            >
               Trusted by 500+ students at Russell Group universities
-            </p>
-            <div className="relative overflow-hidden">
+            </motion.p>
+            <motion.div className="relative overflow-hidden" variants={fadeInUp}>
               <div className="absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent pointer-events-none" />
               <div className="absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent pointer-events-none" />
               <Marquee pauseOnHover className="[--duration:30s] [--gap:4rem]">
@@ -349,132 +450,188 @@ export default function Home() {
                   className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
                 />
               </Marquee>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* How It Works */}
         <section ref={featuresRef} className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">how mentiora works</h2>
-              <p className="text-muted-foreground text-lg">
+            <motion.div 
+              className="text-center mb-16"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>how mentiora works</motion.h2>
+              <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 Everything you need to revise smarter, not harder.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card>
-                <CardHeader>
-                  <div className="mb-2">
-                    <HugeiconsIcon icon={BookOpen02Icon} className="size-8" />
-                  </div>
-                  <CardTitle>practice real exam questions</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Work through realistic, exam-style questions written to
-                    match your exact specification. Each one is built to reflect
-                    the style, difficulty, and wording of upcoming exams.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <div className="mb-2">
-                    <HugeiconsIcon icon={Message01Icon} className="size-8" />
-                  </div>
-                  <CardTitle>get unstuck, instantly</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Stuck on a concept? Ask your tutor anything. It won&apos;t give
-                    away answers—it guides you with hints and questions until
-                    you understand it yourself.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <div className="mb-2">
-                    <HugeiconsIcon icon={ChartUpIcon} className="size-8" />
-                  </div>
-                  <CardTitle>watch your grade improve</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    See your predicted grade update in real-time as you
-                    practice. Track which topics you&apos;ve mastered and which need
-                    work, all calculated automatically.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+              </motion.p>
+            </motion.div>
+            <motion.div 
+              className="grid md:grid-cols-3 gap-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={cardAnimation}>
+                <Card className="h-full">
+                  <CardHeader>
+                    <div className="mb-2">
+                      <HugeiconsIcon icon={BookOpen02Icon} className="size-8" />
+                    </div>
+                    <CardTitle>practice real exam questions</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Work through realistic, exam-style questions written to
+                      match your exact specification. Each one is built to reflect
+                      the style, difficulty, and wording of upcoming exams.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+              <motion.div variants={cardAnimation}>
+                <Card className="h-full">
+                  <CardHeader>
+                    <div className="mb-2">
+                      <HugeiconsIcon icon={Message01Icon} className="size-8" />
+                    </div>
+                    <CardTitle>get unstuck, instantly</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Stuck on a concept? Ask your tutor anything. It won&apos;t give
+                      away answers—it guides you with hints and questions until
+                      you understand it yourself.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+              <motion.div variants={cardAnimation}>
+                <Card className="h-full">
+                  <CardHeader>
+                    <div className="mb-2">
+                      <HugeiconsIcon icon={ChartUpIcon} className="size-8" />
+                    </div>
+                    <CardTitle>watch your grade improve</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      See your predicted grade update in real-time as you
+                      practice. Track which topics you&apos;ve mastered and which need
+                      work, all calculated automatically.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Subjects Section */}
         <section ref={subjectsRef} className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">
+            <motion.div 
+              className="text-center mb-16"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>
                 study what{" "}
-<Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
-                    actually gets marks.
-                  </Highlighter>
-              </h2>
-              <p className="text-muted-foreground text-lg">
+                <Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
+                  actually gets marks.
+                </Highlighter>
+              </motion.h2>
+              <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 Aligned to your exact exam board. No filler. No wasted time.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
+              </motion.p>
+            </motion.div>
+            <motion.div 
+              className="grid md:grid-cols-2 gap-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeInUp}>
                 <h3 className="text-xl font-semibold mb-6">
                   exam boards we support
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <motion.div 
+                  className="flex flex-wrap gap-3"
+                  variants={staggerContainer}
+                >
                   {examBoards.map((board) => (
-                    <Card key={board.name} className="px-4 py-3">
-                      <div className="font-semibold">{board.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {board.level}
-                      </div>
-                    </Card>
+                    <motion.div key={board.name} variants={cardAnimation}>
+                      <Card className="px-4 py-3">
+                        <div className="font-semibold">{board.name}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {board.level}
+                        </div>
+                      </Card>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
-              <div>
+                </motion.div>
+              </motion.div>
+              <motion.div variants={fadeInUp}>
                 <h3 className="text-xl font-semibold mb-6">
                   subjects available
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {subjects.map((subject) => (
-                    <Badge key={subject.name} variant="secondary">
-                      {subject.name}
-                    </Badge>
+                <motion.div 
+                  className="flex flex-wrap gap-2"
+                  variants={staggerContainer}
+                >
+                  {subjects.map((subject, index) => (
+                    <motion.div 
+                      key={subject.name} 
+                      variants={wordAnimation}
+                      custom={index}
+                    >
+                      <Badge variant="secondary">
+                        {subject.name}
+                      </Badge>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Learning System Section */}
         <section className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">
+            <motion.div 
+              className="text-center mb-16"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>
                 a learning system that{" "}
-<Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
-                    never stops improving
-                  </Highlighter>
-              </h2>
-              <p className="text-muted-foreground text-lg">
+                <Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
+                  never stops improving
+                </Highlighter>
+              </motion.h2>
+              <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 Every question you answer makes Mentiora smarter about how you
                 learn.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
+              </motion.p>
+            </motion.div>
+            <motion.div 
+              className="grid md:grid-cols-3 gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.div className="text-center" variants={cardAnimation}>
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   1
                 </div>
@@ -482,8 +639,8 @@ export default function Home() {
                 <p className="text-muted-foreground">
                   Answer questions and get instant feedback
                 </p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div className="text-center" variants={cardAnimation}>
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   2
                 </div>
@@ -491,8 +648,8 @@ export default function Home() {
                 <p className="text-muted-foreground">
                   We track 50+ data points from every answer
                 </p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div className="text-center" variants={cardAnimation}>
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   3
                 </div>
@@ -502,51 +659,72 @@ export default function Home() {
                 <p className="text-muted-foreground">
                   Three features that adapt to you in real-time
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Pricing Section */}
         <section ref={pricingRef} className="py-24 px-4">
           <div className="container mx-auto max-w-3xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">calculate your savings</h2>
-              <p className="text-muted-foreground text-lg">
+            <motion.div 
+              className="text-center mb-16"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>calculate your savings</motion.h2>
+              <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 See how much you&apos;ll save compared to private tutoring
-              </p>
-            </div>
-            <SavingsCalculator />
+              </motion.p>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={cardAnimation}
+            >
+              <SavingsCalculator />
+            </motion.div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="py-24 px-4">
+        <motion.section 
+          className="py-24 px-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
           <div className="container mx-auto text-center max-w-3xl">
-            <h2 className="text-3xl font-bold mb-4">
+            <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>
               start your journey to better grades
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8">
+            </motion.h2>
+            <motion.p className="text-muted-foreground text-lg mb-8" variants={fadeInUp}>
               Join thousands of students already improving with Mentiora
-            </p>
-            <Button size="xl" className="px-6">
-              Try now for free
-              <motion.span
-                animate={{
-                  x: [0, 3, 0],
-                  y: [0, -3, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
-              </motion.span>
-            </Button>
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Button size="xl" className="px-6">
+                Try now for free
+                <motion.span
+                  animate={{
+                    x: [0, 3, 0],
+                    y: [0, -3, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                </motion.span>
+              </Button>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
       </main>
 
       {/* Footer */}
