@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   BookOpen02Icon,
+  Login01Icon,
   Message01Icon,
   ChartHistogramIcon,
   GraduationScrollIcon,
@@ -14,6 +15,8 @@ import {
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
+import { Highlighter } from "@/components/ui/highlighter";
 
 const subjects = [
   { emoji: "🧬", name: "Biology" },
@@ -83,7 +86,10 @@ export default function Home() {
               <Button variant="ghost">Pricing</Button>
             </nav>
             <div className="flex items-center gap-2">
-              <Button variant="ghost">Login</Button>
+              <Button variant="ghost">
+                Login
+                <HugeiconsIcon icon={Login01Icon} className="size-4" strokeWidth={2} />
+              </Button>
               <AnimatePresence>
                 {showNavCTA && (
                   <motion.div
@@ -104,11 +110,21 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="py-40 px-4">
-          <div className="container mx-auto text-center max-w-3xl">
+        <section className="relative py-40 px-4 overflow-hidden">
+          <InteractiveGridPattern
+            width={50}
+            height={50}
+            squares={[50, 15]}
+            className="opacity-50 mask-[radial-gradient(ellipse_at_center,white_20%,transparent_70%)]"
+            squaresClassName="stroke-muted-foreground/20 hover:fill-muted-foreground/10"
+          />
+          <div className="container relative z-10 mx-auto text-center max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Your revision,<br />
-              finally made <em>personal</em>
+              your revision,<br />
+              finally made{" "}
+              <Highlighter action="highlight" color="#FF99D9" isView>
+                <em>personal</em>
+              </Highlighter>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Personalised GCSE & A-Level revision<br />
