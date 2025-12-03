@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Marquee } from "@/components/ui/marquee";
+import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
@@ -115,9 +116,9 @@ const subjects = [
 ];
 
 const examBoards = [
-  { name: "AQA", level: "GCSE & A-Level" },
-  { name: "Edexcel", level: "GCSE & IGCSE" },
-  { name: "OCR", level: "GCSE" },
+  { name: "AQA", level: "GCSE & A-Level", logo: "/exams/aqa-logo.svg" },
+  { name: "Edexcel", level: "GCSE & IGCSE", logo: "/exams/edexcel-logo.svg" },
+  { name: "OCR", level: "GCSE", logo: "/exams/ocr-logo.webp" },
 ];
 
 const PRIVATE_TUTORING_MONTHLY = 500;
@@ -393,17 +394,29 @@ export default function Home() {
               transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.55 }}
               className="mb-8"
             >
-              <TypingAnimation
-                className="text-xl text-muted-foreground"
-                typeSpeed={50}
-                delay={600}
-                loop={false}
-                startOnView={true}
-                showCursor={false}
-                as="p"
-              >
-                Personalised GCSE & A-Level revision built to help you reach your best results.
-              </TypingAnimation>
+              <p className="text-xl text-muted-foreground leading-normal">
+                <TypingAnimation
+                  className="leading-normal"
+                  typeSpeed={50}
+                  delay={600}
+                  loop={false}
+                  startOnView={true}
+                  showCursor={false}
+                >
+                  Personalised GCSE & A-Level revision
+                </TypingAnimation>
+                <br />
+                <TypingAnimation
+                  className="leading-normal"
+                  typeSpeed={50}
+                  delay={2700}
+                  loop={false}
+                  startOnView={true}
+                  showCursor={false}
+                >
+                  built to help you reach your best results.
+                </TypingAnimation>
+              </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
@@ -619,10 +632,19 @@ export default function Home() {
                 >
                   {examBoards.map((board) => (
                     <motion.div key={board.name} variants={cardAnimation}>
-                      <Card className="px-4 py-3">
-                        <div className="font-semibold">{board.name}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {board.level}
+                      <Card className="p-4">
+                        <div className="flex flex-col items-start gap-2">
+                          <Image
+                            src={board.logo}
+                            alt={`${board.name} logo`}
+                            width={60}
+                            height={60}
+                            className="h-16 w-auto object-contain"
+                          />
+                          <Separator className="w-full mt-2" />
+                          <div className="text-sm text-muted-foreground text-left">
+                            {board.level}
+                          </div>
                         </div>
                       </Card>
                     </motion.div>

@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { motion, MotionProps, useInView } from "motion/react"
+import { useInView } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
-interface TypingAnimationProps extends MotionProps {
+interface TypingAnimationProps extends React.HTMLAttributes<HTMLElement> {
   children?: string
   words?: string[]
   className?: string
@@ -39,16 +39,14 @@ export function TypingAnimation({
   cursorStyle = "line",
   ...props
 }: TypingAnimationProps) {
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: true,
-  })
+  const ComponentToRender = Component as React.ElementType
 
   const [displayedText, setDisplayedText] = useState<string>("")
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [currentCharIndex, setCurrentCharIndex] = useState(0)
   const [phase, setPhase] = useState<"typing" | "pause" | "deleting">("typing")
   const elementRef = useRef<HTMLElement | null>(null)
-  const isInView = useInView(elementRef as React.RefObject<Element>, {
+  const isInView = useInView(elementRef, {
     amount: 0.3,
     once: true,
   })
@@ -155,7 +153,7 @@ export function TypingAnimation({
   }
 
   return (
-    <MotionComponent
+    <ComponentToRender
       ref={elementRef}
       className={cn("leading-[5rem] tracking-[-0.02em]", className)}
       {...props}
@@ -168,6 +166,6 @@ export function TypingAnimation({
           {getCursorChar()}
         </span>
       )}
-    </MotionComponent>
+    </ComponentToRender>
   )
 }
