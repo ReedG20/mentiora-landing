@@ -17,7 +17,7 @@ import {
   AtomIcon,
   CalculatorIcon,
   TextIcon,
-  ComputerIcon,
+  BinaryCodeIcon,
   GlobeIcon,
   ClockIcon,
   Brain02Icon,
@@ -103,7 +103,7 @@ const subjects = [
   { name: "Maths", icon: CalculatorIcon },
   { name: "English Language", icon: TextIcon },
   { name: "English Literature", icon: BookIcon },
-  { name: "Computer Science", icon: ComputerIcon },
+  { name: "Computer Science", icon: BinaryCodeIcon },
   { name: "Geography", icon: GlobeIcon },
   { name: "History", icon: ClockIcon },
   { name: "Psychology", icon: Brain02Icon },
@@ -628,9 +628,9 @@ export default function Home() {
                       custom={index}
                     >
                       <Card className="px-6 py-4 min-w-[140px]">
-                        <div className="flex flex-col items-center gap-3">
+                        <div className="flex flex-col items-start gap-3">
                           <HugeiconsIcon icon={subject.icon} className="size-6" />
-                          <div className="font-semibold text-base text-center">
+                          <div className="font-semibold text-base text-left">
                             {subject.name}
                           </div>
                         </div>
