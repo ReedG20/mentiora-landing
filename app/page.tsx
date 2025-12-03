@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Highlighter } from "@/components/ui/highlighter";
 import Logo from "@/components/ui/logo";
+import UnicornScene from "unicornstudio-react";
 
 const subjects = [
   { emoji: "🧬", name: "Biology" },
@@ -72,6 +73,21 @@ export default function Home() {
     };
   }, []);
 
+  // Remove Unicorn Studio watermark
+  useEffect(() => {
+    const removeWatermark = () => {
+      const watermarks = document.querySelectorAll('a[href*="unicorn.studio"]');
+      watermarks.forEach((el) => el.remove());
+    };
+
+    // Run immediately and observe for dynamically added elements
+    removeWatermark();
+    const observer = new MutationObserver(removeWatermark);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -113,22 +129,19 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section className="relative py-40 px-4 overflow-hidden">
-          <InteractiveGridPattern
-            width={50}
-            height={50}
-            squares={[50, 15]}
-            className="opacity-50 mask-[radial-gradient(ellipse_at_center,white_20%,transparent_70%)]"
-            squaresClassName="stroke-muted-foreground/20 hover:fill-muted-foreground/10"
-          />
-          {/* Student glyph - bottom left */}
-          <Image
-            src="/student-glyph-dither.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute bottom-0 left-0 w-auto h-[75%] object-contain mix-blend-multiply opacity-85 pointer-events-none select-none mask-[linear-gradient(to_bottom,black_65%,transparent_100%)]"
-            aria-hidden="true"
-          />
+          <div className="absolute inset-0 z-0">
+            <UnicornScene
+              projectId="3RcPyrOTK97Anc0TNg0i"
+              width="100%"
+              height="100%"
+              scale={1}
+              dpi={1.5}
+              lazyLoad={true}
+              altText="Mentiora hero background"
+            />
+            {/* Cover Unicorn Studio watermark */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[80px] bg-white z-10" />
+          </div>
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
               your revision,<br />

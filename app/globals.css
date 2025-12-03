@@ -159,3 +159,8 @@
     font-size: calc(2.25rem * 1.4) !important;
   }
 }
+
+/* Hide Unicorn Studio watermark */
+a[href*="unicorn.studio"] {
+  display: none !important;
+}
