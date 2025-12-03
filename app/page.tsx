@@ -361,19 +361,17 @@ export default function Home() {
             </motion.h1>
             <motion.p 
               className="text-xl text-muted-foreground mb-8"
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              transition={{ delay: 0.5 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.55 }}
             >
               Personalised GCSE & A-Level revision<br />
               built to help you reach your best results.
             </motion.p>
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              transition={{ delay: 0.7 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.8 }}
             >
               <Button ref={heroCtaRef} size="xl" className="px-6">
                 Try now for free
@@ -398,19 +396,15 @@ export default function Home() {
         {/* Social Proof */}
         <motion.section 
           className="py-12 px-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
+          initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 1.05 }}
         >
           <div className="container mx-auto">
-            <motion.p 
-              className="text-center text-muted-foreground mb-6"
-              variants={fadeInUp}
-            >
+            <p className="text-center text-muted-foreground mb-6">
               Trusted by 500+ students at Russell Group universities
-            </motion.p>
-            <motion.div className="relative overflow-hidden" variants={fadeInUp}>
+            </p>
+            <div className="relative overflow-hidden">
               <div className="absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent pointer-events-none" />
               <div className="absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent pointer-events-none" />
               <Marquee pauseOnHover className="[--duration:30s] [--gap:4rem]">
@@ -450,7 +444,7 @@ export default function Home() {
                   className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
                 />
               </Marquee>
-            </motion.div>
+            </div>
           </div>
         </motion.section>
 
@@ -464,7 +458,16 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>how mentiora works</motion.h2>
+              <motion.h2 
+                className="text-3xl font-bold mb-4"
+                variants={staggerContainer}
+              >
+                {["how ", "mentiora ", "works"].map((word, i) => (
+                  <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.h2>
               <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 Everything you need to revise smarter, not harder.
               </motion.p>
@@ -541,11 +544,20 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>
-                study what{" "}
-                <Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
-                  actually gets marks.
-                </Highlighter>
+              <motion.h2 
+                className="text-3xl font-bold mb-4"
+                variants={staggerContainer}
+              >
+                {["study ", "what "].map((word, i) => (
+                  <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                    {word}
+                  </motion.span>
+                ))}
+                <motion.span variants={wordAnimation} className="inline-block">
+                  <Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView delay={500}>
+                    actually gets marks.
+                  </Highlighter>
+                </motion.span>
               </motion.h2>
               <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 Aligned to your exact exam board. No filler. No wasted time.
@@ -613,11 +625,20 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>
-                a learning system that{" "}
-                <Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
-                  never stops improving
-                </Highlighter>
+              <motion.h2 
+                className="text-3xl font-bold mb-4"
+                variants={staggerContainer}
+              >
+                {["a ", "learning ", "system ", "that "].map((word, i) => (
+                  <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                    {word}
+                  </motion.span>
+                ))}
+                <motion.span variants={wordAnimation} className="inline-block">
+                  <Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView delay={700}>
+                    never stops improving
+                  </Highlighter>
+                </motion.span>
               </motion.h2>
               <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 Every question you answer makes Mentiora smarter about how you
@@ -674,7 +695,16 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>calculate your savings</motion.h2>
+              <motion.h2 
+                className="text-3xl font-bold mb-4"
+                variants={staggerContainer}
+              >
+                {["calculate ", "your ", "savings"].map((word, i) => (
+                  <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.h2>
               <motion.p className="text-muted-foreground text-lg" variants={fadeInUp}>
                 See how much you&apos;ll save compared to private tutoring
               </motion.p>
@@ -699,8 +729,15 @@ export default function Home() {
           variants={staggerContainer}
         >
           <div className="container mx-auto text-center max-w-3xl">
-            <motion.h2 className="text-3xl font-bold mb-4" variants={fadeInUp}>
-              start your journey to better grades
+            <motion.h2 
+              className="text-3xl font-bold mb-4"
+              variants={staggerContainer}
+            >
+              {["start ", "your ", "journey ", "to ", "better ", "grades"].map((word, i) => (
+                <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                  {word}
+                </motion.span>
+              ))}
             </motion.h2>
             <motion.p className="text-muted-foreground text-lg mb-8" variants={fadeInUp}>
               Join thousands of students already improving with Mentiora
