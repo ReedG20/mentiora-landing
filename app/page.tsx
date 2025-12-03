@@ -497,7 +497,7 @@ export default function Home() {
                     <div className="mb-2">
                       <HugeiconsIcon icon={BookOpen02Icon} className="size-8" />
                     </div>
-                    <CardTitle>practice real exam questions</CardTitle>
+                    <CardTitle>Practice real exam questions</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
@@ -514,7 +514,7 @@ export default function Home() {
                     <div className="mb-2">
                       <HugeiconsIcon icon={Message01Icon} className="size-8" />
                     </div>
-                    <CardTitle>get unstuck, instantly</CardTitle>
+                    <CardTitle>Get unstuck, instantly</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
@@ -531,7 +531,7 @@ export default function Home() {
                     <div className="mb-2">
                       <HugeiconsIcon icon={ChartUpIcon} className="size-8" />
                     </div>
-                    <CardTitle>watch your grade improve</CardTitle>
+                    <CardTitle>Watch your grade improve</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
@@ -584,7 +584,7 @@ export default function Home() {
             >
               <motion.div variants={fadeInUp}>
                 <h3 className="text-xl font-semibold mb-6">
-                  exam boards we support
+                  Exam boards we support
                 </h3>
                 <motion.div 
                   className="flex flex-wrap gap-3"
@@ -604,7 +604,7 @@ export default function Home() {
               </motion.div>
               <motion.div variants={fadeInUp}>
                 <h3 className="text-xl font-semibold mb-6">
-                  subjects available
+                  Subjects available
                 </h3>
                 <motion.div 
                   className="flex flex-wrap gap-4"
@@ -673,7 +673,7 @@ export default function Home() {
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   1
                 </div>
-                <h3 className="text-xl font-semibold mb-2">you study</h3>
+                <h3 className="text-xl font-semibold mb-2">You study</h3>
                 <p className="text-muted-foreground">
                   Answer questions and get instant feedback
                 </p>
@@ -682,7 +682,7 @@ export default function Home() {
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   2
                 </div>
-                <h3 className="text-xl font-semibold mb-2">mentiora analyzes</h3>
+                <h3 className="text-xl font-semibold mb-2">Mentiora analyzes</h3>
                 <p className="text-muted-foreground">
                   We track 50+ data points from every answer
                 </p>
@@ -692,7 +692,7 @@ export default function Home() {
                   3
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  you get personalized results
+                  You get personalized results
                 </h3>
                 <p className="text-muted-foreground">
                   Three features that adapt to you in real-time
