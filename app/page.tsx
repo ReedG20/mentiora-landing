@@ -25,7 +25,8 @@ import {
   BriefcaseIcon,
   BookIcon,
   Atom02Icon,
-  Quran01Icon
+  Quran01Icon,
+  PartyIcon
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
@@ -365,6 +366,17 @@ export default function Home() {
             />
           </div>
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.2 }}
+              className="mb-3 flex justify-center"
+            >
+              <span className="inline-flex items-center justify-center rounded-full border bg-white shadow-md hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-1.5 text-sm font-medium gap-3">
+                <div className="rounded-full bg-red-500 size-2"></div>
+                Mentiora 2.0 is here!
+              </span>
+            </motion.div>
             <motion.h1 
               className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
               initial="hidden"
@@ -459,7 +471,7 @@ export default function Home() {
             <div className="relative overflow-hidden">
               <div className="absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent pointer-events-none" />
               <div className="absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent pointer-events-none" />
-              <Marquee pauseOnHover className="[--duration:30s] [--gap:4rem]">
+              <Marquee className="[--duration:30s] [--gap:5rem]">
                 <Image
                   src="/russell-group-universities/bath-logo-CHVRJtA5.png"
                   alt="University of Bath"
