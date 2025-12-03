@@ -83,7 +83,6 @@ export function Highlighter({
       })
 
       resizeObserver.observe(element)
-      resizeObserver.observe(document.body)
     }
 
     // If there's a delay, wait before showing the annotation
