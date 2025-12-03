@@ -292,7 +292,7 @@ export default function Home() {
                   y: [0, -3, 0],
                 }}
                 transition={{
-                  duration: 1,
+                  duration: 2,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
@@ -537,7 +537,7 @@ export default function Home() {
                   y: [0, -3, 0],
                 }}
                 transition={{
-                  duration: 1,
+                  duration: 2,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
