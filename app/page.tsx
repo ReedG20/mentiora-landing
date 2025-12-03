@@ -9,16 +9,17 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import {
   BookOpen02Icon,
-  Login01Icon,
   Message01Icon,
   ChartHistogramIcon,
   GraduationScrollIcon,
   ArrowUpRight01Icon,
+  ArrowRight02Icon,
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Highlighter } from "@/components/ui/highlighter";
+import Logo from "@/components/ui/logo";
 
 const subjects = [
   { emoji: "🧬", name: "Biology" },
@@ -77,8 +78,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <HugeiconsIcon icon={GraduationScrollIcon} className="size-6" />
-            <span className="text-lg font-semibold">Mentiora</span>
+            <Logo className="h-6" />
           </div>
           <div className="flex items-center gap-2">
             <nav className="hidden md:flex items-center gap-2">
@@ -88,10 +88,7 @@ export default function Home() {
               <Button variant="ghost">Pricing</Button>
             </nav>
             <div className="flex items-center gap-2">
-              <Button variant="ghost">
-                Login
-                <HugeiconsIcon icon={Login01Icon} className="size-4" strokeWidth={2} />
-              </Button>
+              <Button variant="ghost">Login</Button>
               <AnimatePresence>
                 {showNavCTA && (
                   <motion.div
@@ -101,7 +98,10 @@ export default function Home() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     style={{ overflow: "hidden" }}
                   >
-                    <Button className="whitespace-nowrap">Try Mentiora</Button>
+                    <Button className="whitespace-nowrap">
+                      Try Mentiora
+                      <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" strokeWidth={2} />
+                    </Button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -132,9 +132,9 @@ export default function Home() {
               Personalised GCSE & A-Level revision<br />
               built to help you reach your best results.
             </p>
-            <Button ref={heroCtaRef} size="lg">
+            <Button ref={heroCtaRef} size="xl">
               Try now for free
-              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-5" />
+              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
             </Button>
           </div>
         </section>
@@ -388,9 +388,9 @@ export default function Home() {
             <p className="text-muted-foreground text-lg mb-8">
               Join thousands of students already improving with Mentiora
             </p>
-            <Button size="lg">
+            <Button size="xl">
               Try now for free
-              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-5" />
+              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
             </Button>
           </div>
         </section>
