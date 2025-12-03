@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+Do not run the dev server unless you really need to. I often have the dev server running already, so it is unnecessary.

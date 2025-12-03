@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+Always rely on Shadcn/UI and its default styling for new UI creations. Check the Shadcn documentation to fully utilize their diverse collection of components.
+
+Use Hugeicons for icons, NOT Lucide

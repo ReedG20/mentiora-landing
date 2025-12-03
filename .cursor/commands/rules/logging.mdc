@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+Do not use console.log() to add logs. Instead, use the project's pino configuration. Also, never use emojis in logs.
