@@ -11,13 +11,11 @@ import {
   BookOpen02Icon,
   Message01Icon,
   ChartHistogramIcon,
-  GraduationScrollIcon,
   ArrowUpRight01Icon,
   ArrowRight02Icon,
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Highlighter } from "@/components/ui/highlighter";
 import Logo from "@/components/ui/logo";
 import UnicornScene from "unicornstudio-react";
@@ -48,6 +46,9 @@ const examBoards = [
 export default function Home() {
   const [showNavCTA, setShowNavCTA] = useState(false);
   const heroCtaRef = useRef<HTMLButtonElement>(null);
+  const featuresRef = useRef<HTMLElement>(null);
+  const subjectsRef = useRef<HTMLElement>(null);
+  const pricingRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -89,7 +90,16 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Bottom left decorative image */}
+      <Image
+        src="/student-glyph-dither.png"
+        alt=""
+        width={500}
+        height={500}
+        className="absolute bottom-0 -left-12 pointer-events-none mix-blend-multiply"
+        aria-hidden="true"
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -98,10 +108,9 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2">
             <nav className="hidden md:flex items-center gap-2">
-              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">About Us</Button>
-              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Subjects</Button>
-              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Features</Button>
-              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Pricing</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => featuresRef.current?.scrollIntoView({ behavior: "smooth" })}>Features</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => subjectsRef.current?.scrollIntoView({ behavior: "smooth" })}>Subjects</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => pricingRef.current?.scrollIntoView({ behavior: "smooth" })}>Pricing</Button>
             </nav>
             <div className="flex items-center gap-2">
               <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Login</Button>
@@ -168,8 +177,8 @@ export default function Home() {
               Trusted by 500+ students at Russell Group universities
             </p>
             <div className="relative overflow-hidden">
-              <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-              <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+              <div className="absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent pointer-events-none" />
+              <div className="absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent pointer-events-none" />
               <Marquee pauseOnHover className="[--duration:30s] [--gap:4rem]">
                 <Image
                   src="/russell-group-universities/bath-logo-CHVRJtA5.png"
@@ -212,7 +221,7 @@ export default function Home() {
         </section>
 
         {/* How It Works */}
-        <section className="py-24 px-4">
+        <section ref={featuresRef} className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4">How Mentiora Works</h2>
@@ -271,7 +280,7 @@ export default function Home() {
         </section>
 
         {/* Subjects Section */}
-        <section className="py-24 px-4 bg-muted/50">
+        <section ref={subjectsRef} className="py-24 px-4 bg-muted/50">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4">
@@ -360,7 +369,7 @@ export default function Home() {
         </section>
 
         {/* Pricing Section */}
-        <section className="py-24 px-4 bg-muted/50">
+        <section ref={pricingRef} className="py-24 px-4 bg-muted/50">
           <div className="container mx-auto max-w-3xl">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4">Calculate your savings</h2>
@@ -419,33 +428,11 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <HugeiconsIcon icon={GraduationScrollIcon} className="size-6" />
-                <span className="text-lg font-semibold">Mentiora</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Personalised learning for GCSE & A-Levels
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Pricing</li>
-                <li>Features</li>
-                <li>Subjects</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>About us</li>
-              </ul>
-            </div>
-          </div>
+      <footer className="py-12 px-4">
+        <div className="container mx-auto text-center">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Mentiora. All rights reserved.
+          </p>
         </div>
       </footer>
     </div>
