@@ -14,7 +14,7 @@ import {
   ArrowRight02Icon,
   Dna01Icon,
   Chemistry01Icon,
-  AtomIcon,
+  GravityIcon,
   CalculatorIcon,
   TextIcon,
   BinaryCodeIcon,
@@ -99,7 +99,7 @@ const cardAnimation: Variants = {
 const subjects = [
   { name: "Biology", icon: Dna01Icon },
   { name: "Chemistry", icon: Chemistry01Icon },
-  { name: "Physics", icon: AtomIcon },
+  { name: "Physics", icon: GravityIcon },
   { name: "Maths", icon: CalculatorIcon },
   { name: "English Language", icon: TextIcon },
   { name: "English Literature", icon: BookIcon },
@@ -242,7 +242,7 @@ function SavingsCalculator() {
 
 export default function Home() {
   const [showNavCTA, setShowNavCTA] = useState(false);
-  const heroCtaRef = useRef<HTMLButtonElement>(null);
+  const heroCtaRef = useRef<HTMLAnchorElement>(null);
   const featuresRef = useRef<HTMLElement>(null);
   const subjectsRef = useRef<HTMLElement>(null);
   const pricingRef = useRef<HTMLElement>(null);
@@ -310,7 +310,9 @@ export default function Home() {
               <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => pricingRef.current?.scrollIntoView({ behavior: "smooth" })}>Pricing</Button>
             </nav>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Login</Button>
+              <Button asChild variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">
+                <a href="https://www.mentiora.com/login">Login</a>
+              </Button>
               <AnimatePresence>
                 {showNavCTA && (
                   <motion.div
@@ -320,9 +322,11 @@ export default function Home() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     style={{ overflow: "hidden" }}
                   >
-                    <Button className="whitespace-nowrap">
-                      Try Mentiora
-                      <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" strokeWidth={2} />
+                    <Button asChild className="whitespace-nowrap">
+                      <a href="https://www.mentiora.com/register">
+                        Try Mentiora
+                        <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" strokeWidth={2} />
+                      </a>
                     </Button>
                   </motion.div>
                 )}
@@ -355,7 +359,7 @@ export default function Home() {
               height={50}
               squares={[60, 30]}
               className="opacity-60"
-              squaresClassName="stroke-gray-300/100 hover:fill-primary/10"
+              squaresClassName="stroke-gray-400/30 hover:fill-primary/10"
             />
           </div>
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
@@ -396,21 +400,23 @@ export default function Home() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.8 }}
             >
-              <Button ref={heroCtaRef} size="xl" className="px-6">
-                Try now for free
-                <motion.span
-                  animate={{
-                    x: [0, 3, 0],
-                    y: [0, -3, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
-                </motion.span>
+              <Button asChild size="xl" className="px-6">
+                <a href="https://www.mentiora.com/register" ref={heroCtaRef}>
+                  Try now for free
+                  <motion.span
+                    animate={{
+                      x: [0, 3, 0],
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                  </motion.span>
+                </a>
               </Button>
             </motion.div>
           </div>
@@ -771,21 +777,23 @@ export default function Home() {
               Join thousands of students already improving with Mentiora
             </motion.p>
             <motion.div variants={fadeInUp}>
-              <Button size="xl" className="px-6">
-                Try now for free
-                <motion.span
-                  animate={{
-                    x: [0, 3, 0],
-                    y: [0, -3, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
-                </motion.span>
+              <Button asChild size="xl" className="px-6">
+                <a href="https://www.mentiora.com/register">
+                  Try now for free
+                  <motion.span
+                    animate={{
+                      x: [0, 3, 0],
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                  </motion.span>
+                </a>
               </Button>
             </motion.div>
           </div>
