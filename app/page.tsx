@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Marquee } from "@/components/ui/marquee";
 import { HugeiconsIcon } from "@hugeicons/react";
+import Image from "next/image";
 import {
   BookOpen02Icon,
   Login01Icon,
@@ -138,11 +140,52 @@ export default function Home() {
         </section>
 
         {/* Social Proof */}
-        <section className="py-12 px-4 border-y bg-muted/50">
-          <div className="container mx-auto text-center">
-            <p className="text-muted-foreground">
+        <section className="py-12 px-4">
+          <div className="container mx-auto">
+            <p className="text-center text-muted-foreground mb-6">
               Trusted by 500+ students at Russell Group universities
             </p>
+            <div className="relative overflow-hidden">
+              <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+              <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+              <Marquee pauseOnHover className="[--duration:30s] [--gap:4rem]">
+                <Image
+                  src="/russell-group-universities/bath-logo-CHVRJtA5.png"
+                  alt="University of Bath"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                />
+                <Image
+                  src="/russell-group-universities/birmingham-logo-BymtUVAW.png"
+                  alt="University of Birmingham"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                />
+                <Image
+                  src="/russell-group-universities/bristol-logo-tsb5ph-g.png"
+                  alt="University of Bristol"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                />
+                <Image
+                  src="/russell-group-universities/newcastle-logo-8OvDUHEQ.svg"
+                  alt="Newcastle University"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                />
+                <Image
+                  src="/russell-group-universities/oxford-logo-DDq1u4We.png"
+                  alt="University of Oxford"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                />
+              </Marquee>
+            </div>
           </div>
         </section>
 
