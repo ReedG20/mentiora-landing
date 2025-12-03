@@ -29,6 +29,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Highlighter } from "@/components/ui/highlighter";
+import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Logo from "@/components/ui/logo";
 import UnicornScene from "unicornstudio-react";
 
@@ -346,6 +347,16 @@ export default function Home() {
             />
             {/* Cover Unicorn Studio watermark */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[80px] bg-white z-10" />
+          </div>
+          {/* Interactive Grid Pattern overlay with radial fade */}
+          <div className="absolute inset-0 z-1 flex items-center justify-center overflow-hidden mask-[radial-gradient(ellipse_at_center,white,transparent_70%)]">
+            <InteractiveGridPattern
+              width={50}
+              height={50}
+              squares={[60, 30]}
+              className="opacity-60"
+              squaresClassName="stroke-gray-300/100 hover:fill-primary/10"
+            />
           </div>
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
             <motion.h1 
