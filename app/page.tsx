@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Marquee } from "@/components/ui/marquee";
 import { Separator } from "@/components/ui/separator";
-import { Slider } from "@/components/ui/slider";
+// import { Slider } from "@/components/ui/slider";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import {
@@ -121,126 +121,126 @@ const examBoards = [
   { name: "OCR", level: "GCSE", logo: "/exams/ocr-logo.webp" },
 ];
 
-/* const PRIVATE_TUTORING_MONTHLY = 500;
-const MENTIORA_MONTHLY = 9.99;
+// const PRIVATE_TUTORING_MONTHLY = 500;
+// const MENTIORA_MONTHLY = 9.99;
 
-function SavingsCalculator() {
-  const [months, setMonths] = useState(6);
+// function SavingsCalculator() {
+//   const [months, setMonths] = useState(6);
 
-  const privateTutoringCost = PRIVATE_TUTORING_MONTHLY * months;
-  const mentioraCost = MENTIORA_MONTHLY * months;
-  const savings = privateTutoringCost - mentioraCost;
-  const savingsPercentage = Math.round((savings / privateTutoringCost) * 100);
+//   const privateTutoringCost = PRIVATE_TUTORING_MONTHLY * months;
+//   const mentioraCost = MENTIORA_MONTHLY * months;
+//   const savings = privateTutoringCost - mentioraCost;
+//   const savingsPercentage = Math.round((savings / privateTutoringCost) * 100);
 
-  return (
-    <Card className="overflow-hidden">
-      <CardContent className="pt-10">
-        {/* Total Savings Display */}
-        <div className="text-center mb-10">
-          <p className="text-xs font-semibold tracking-widest text-muted-foreground mb-2">
-            TOTAL SAVINGS
-          </p>
-          <motion.p
-            key={savings}
-            initial={{ scale: 0.95, opacity: 0.5 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-bold text-primary"
-            style={{ fontFamily: "var(--font-geist-sans)" }}
-          >
-            £{savings.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </motion.p>
-          <p className="text-muted-foreground mt-2">
-            over {months} month{months !== 1 ? "s" : ""}
-          </p>
-        </div>
+//   return (
+//     <Card className="overflow-hidden">
+//       <CardContent className="pt-10">
+//         {/* Total Savings Display */}
+//         <div className="text-center mb-10">
+//           <p className="text-xs font-semibold tracking-widest text-muted-foreground mb-2">
+//             TOTAL SAVINGS
+//           </p>
+//           <motion.p
+//             key={savings}
+//             initial={{ scale: 0.95, opacity: 0.5 }}
+//             animate={{ scale: 1, opacity: 1 }}
+//             className="text-5xl md:text-6xl font-bold text-primary"
+//             style={{ fontFamily: "var(--font-geist-sans)" }}
+//           >
+//             £{savings.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+//           </motion.p>
+//           <p className="text-muted-foreground mt-2">
+//             over {months} month{months !== 1 ? "s" : ""}
+//           </p>
+//         </div>
 
-        {/* Slider Section */}
-        <div className="max-w-lg mx-auto mb-10 px-4">
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm font-medium">How many months will you study?</p>
-            <motion.span
-              key={months}
-              initial={{ scale: 1.2 }}
-              animate={{ scale: 1 }}
-              className="text-xl font-bold text-primary"
-              style={{ fontFamily: "var(--font-geist-sans)" }}
-            >
-              {months}
-            </motion.span>
-          </div>
-          <Slider
-            value={[months]}
-            onValueChange={(value) => setMonths(value[0])}
-            min={1}
-            max={12}
-            step={1}
-            className="w-full"
-          />
-          <div className="flex justify-between mt-2 text-xs text-muted-foreground">
-            <span>1 month</span>
-            <span>12 months</span>
-          </div>
-        </div>
+//         {/* Slider Section */}
+//         <div className="max-w-lg mx-auto mb-10 px-4">
+//           <div className="flex justify-between items-center mb-4">
+//             <p className="text-sm font-medium">How many months will you study?</p>
+//             <motion.span
+//               key={months}
+//               initial={{ scale: 1.2 }}
+//               animate={{ scale: 1 }}
+//               className="text-xl font-bold text-primary"
+//               style={{ fontFamily: "var(--font-geist-sans)" }}
+//             >
+//               {months}
+//             </motion.span>
+//           </div>
+//           <Slider
+//             value={[months]}
+//             onValueChange={(value) => setMonths(value[0])}
+//             min={1}
+//             max={12}
+//             step={1}
+//             className="w-full"
+//           />
+//           <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+//             <span>1 month</span>
+//             <span>12 months</span>
+//           </div>
+//         </div>
 
-        {/* Cost Comparison Cards */}
-        <div className="grid md:grid-cols-3 gap-4">
-          {/* Private Tutoring */}
-          <div className="rounded-xl p-5 bg-red-50 border-2 border-red-100">
-            <p className="text-sm font-semibold text-red-600 mb-2">Private Tutoring</p>
-            <motion.p
-              key={privateTutoringCost}
-              initial={{ opacity: 0.5 }}
-              animate={{ opacity: 1 }}
-              className="text-3xl font-bold text-foreground"
-              style={{ fontFamily: "var(--font-geist-sans)" }}
-            >
-              £{privateTutoringCost.toLocaleString("en-GB")}
-            </motion.p>
-            <p className="text-sm text-muted-foreground mt-1">
-              £{PRIVATE_TUTORING_MONTHLY}/month × {months}
-            </p>
-          </div>
+//         {/* Cost Comparison Cards */}
+//         <div className="grid md:grid-cols-3 gap-4">
+//           {/* Private Tutoring */}
+//           <div className="rounded-xl p-5 bg-red-50 border-2 border-red-100">
+//             <p className="text-sm font-semibold text-red-600 mb-2">Private Tutoring</p>
+//             <motion.p
+//               key={privateTutoringCost}
+//               initial={{ opacity: 0.5 }}
+//               animate={{ opacity: 1 }}
+//               className="text-3xl font-bold text-foreground"
+//               style={{ fontFamily: "var(--font-geist-sans)" }}
+//             >
+//               £{privateTutoringCost.toLocaleString("en-GB")}
+//             </motion.p>
+//             <p className="text-sm text-muted-foreground mt-1">
+//               £{PRIVATE_TUTORING_MONTHLY}/month × {months}
+//             </p>
+//           </div>
 
-          {/* Mentiora */}
-          <div className="rounded-xl p-5 bg-blue-50 border-2 border-blue-100">
-            <div className="flex items-center gap-2 mb-2">
-              <p className="text-sm font-semibold text-primary">Mentiora</p>
-            </div>
-            <motion.p
-              key={mentioraCost}
-              initial={{ opacity: 0.5 }}
-              animate={{ opacity: 1 }}
-              className="text-3xl font-bold text-foreground"
-              style={{ fontFamily: "var(--font-geist-sans)" }}
-            >
-              £{mentioraCost.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-            </motion.p>
-            <p className="text-sm text-muted-foreground mt-1">
-              £{MENTIORA_MONTHLY}/month × {months}
-            </p>
-          </div>
+//           {/* Mentiora */}
+//           <div className="rounded-xl p-5 bg-blue-50 border-2 border-blue-100">
+//             <div className="flex items-center gap-2 mb-2">
+//               <p className="text-sm font-semibold text-primary">Mentiora</p>
+//             </div>
+//             <motion.p
+//               key={mentioraCost}
+//               initial={{ opacity: 0.5 }}
+//               animate={{ opacity: 1 }}
+//               className="text-3xl font-bold text-foreground"
+//               style={{ fontFamily: "var(--font-geist-sans)" }}
+//             >
+//               £{mentioraCost.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+//             </motion.p>
+//             <p className="text-sm text-muted-foreground mt-1">
+//               £{MENTIORA_MONTHLY}/month × {months}
+//             </p>
+//           </div>
 
-          {/* You Save */}
-          <div className="rounded-xl p-5 bg-blue-50/50 border-2 border-blue-100/50">
-            <p className="text-sm font-semibold text-primary mb-2">You Save</p>
-            <motion.p
-              key={savings}
-              initial={{ opacity: 0.5 }}
-              animate={{ opacity: 1 }}
-              className="text-3xl font-bold text-foreground"
-              style={{ fontFamily: "var(--font-geist-sans)" }}
-            >
-              £{savings.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-            </motion.p>
-            <p className="text-sm text-muted-foreground mt-1">
-              {savingsPercentage}% cheaper
-            </p>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-} */
+//           {/* You Save */}
+//           <div className="rounded-xl p-5 bg-blue-50/50 border-2 border-blue-100/50">
+//             <p className="text-sm font-semibold text-primary mb-2">You Save</p>
+//             <motion.p
+//               key={savings}
+//               initial={{ opacity: 0.5 }}
+//               animate={{ opacity: 1 }}
+//               className="text-3xl font-bold text-foreground"
+//               style={{ fontFamily: "var(--font-geist-sans)" }}
+//             >
+//               £{savings.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+//             </motion.p>
+//             <p className="text-sm text-muted-foreground mt-1">
+//               {savingsPercentage}% cheaper
+//             </p>
+//           </div>
+//         </div>
+//       </CardContent>
+//     </Card>
+//   );
+// }
 
 export default function Home() {
   const [showNavCTA, setShowNavCTA] = useState(false);
