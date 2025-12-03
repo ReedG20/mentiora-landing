@@ -31,7 +31,8 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Highlighter } from "@/components/ui/highlighter";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Logo from "@/components/ui/logo";
-import UnicornScene from "unicornstudio-react";
+import { TypingAnimation } from "@/components/ui/typing-animation";
+// import UnicornScene from "unicornstudio-react";
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -272,19 +273,19 @@ export default function Home() {
   }, []);
 
   // Remove Unicorn Studio watermark
-  useEffect(() => {
-    const removeWatermark = () => {
-      const watermarks = document.querySelectorAll('a[href*="unicorn.studio"]');
-      watermarks.forEach((el) => el.remove());
-    };
+  // useEffect(() => {
+  //   const removeWatermark = () => {
+  //     const watermarks = document.querySelectorAll('a[href*="unicorn.studio"]');
+  //     watermarks.forEach((el) => el.remove());
+  //   };
 
-    // Run immediately and observe for dynamically added elements
-    removeWatermark();
-    const observer = new MutationObserver(removeWatermark);
-    observer.observe(document.body, { childList: true, subtree: true });
+  //   // Run immediately and observe for dynamically added elements
+  //   removeWatermark();
+  //   const observer = new MutationObserver(removeWatermark);
+  //   observer.observe(document.body, { childList: true, subtree: true });
 
-    return () => observer.disconnect();
-  }, []);
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -339,7 +340,7 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section className="relative py-40 px-4 overflow-hidden">
-          <div className="absolute inset-0 z-0 hidden lg:block">
+          {/* <div className="absolute inset-0 z-0 hidden lg:block">
             <UnicornScene
               projectId="3RcPyrOTK97Anc0TNg0i"
               width="100%"
@@ -349,9 +350,9 @@ export default function Home() {
               lazyLoad={true}
               altText="Mentiora hero background"
             />
-            {/* Cover Unicorn Studio watermark */}
+            Cover Unicorn Studio watermark
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[80px] bg-white z-10" />
-          </div>
+          </div> */}
           {/* Interactive Grid Pattern overlay with radial fade */}
           <div className="absolute inset-0 z-1 flex items-center justify-center overflow-hidden mask-[radial-gradient(ellipse_at_center,white,transparent_70%)]">
             <InteractiveGridPattern
@@ -386,15 +387,24 @@ export default function Home() {
                 </Highlighter>
               </motion.span>
             </motion.h1>
-            <motion.p 
-              className="text-xl text-muted-foreground mb-8"
+            <motion.div
               initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.55 }}
+              className="mb-8"
             >
-              Personalised GCSE & A-Level revision<br />
-              built to help you reach your best results.
-            </motion.p>
+              <TypingAnimation
+                className="text-xl text-muted-foreground"
+                typeSpeed={50}
+                delay={600}
+                loop={false}
+                startOnView={true}
+                showCursor={false}
+                as="p"
+              >
+                Personalised GCSE & A-Level revision built to help you reach your best results.
+              </TypingAnimation>
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
