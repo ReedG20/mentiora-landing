@@ -10,8 +10,10 @@ import {
   Message01Icon,
   ChartHistogramIcon,
   GraduationScrollIcon,
+  ArrowUpRight01Icon,
 } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const subjects = [
   { emoji: "🧬", name: "Biology" },
@@ -67,7 +69,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full bg-background backdrop-blur bg-background/80 supports-backdrop-filter:bg-background/80">
+      <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <HugeiconsIcon icon={GraduationScrollIcon} className="size-6" />
@@ -82,7 +84,19 @@ export default function Home() {
             </nav>
             <div className="flex items-center gap-2">
               <Button variant="ghost">Login</Button>
-              {showNavCTA && <Button>Try Mentiora</Button>}
+              <AnimatePresence>
+                {showNavCTA && (
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "auto" }}
+                    exit={{ width: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <Button className="whitespace-nowrap">Try Mentiora</Button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -100,8 +114,9 @@ export default function Home() {
               Personalised GCSE & A-Level revision<br />
               built to help you reach your best results.
             </p>
-            <Button ref={heroCtaRef} className="h-12 px-6 text-lg">
+            <Button ref={heroCtaRef} size="lg">
               Try now for free
+              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-5" />
             </Button>
           </div>
         </section>
@@ -314,7 +329,10 @@ export default function Home() {
             <p className="text-muted-foreground text-lg mb-8">
               Join thousands of students already improving with Mentiora
             </p>
-            <Button size="lg">Try now for free</Button>
+            <Button size="lg">
+              Try now for free
+              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-5" />
+            </Button>
           </div>
         </section>
       </main>
