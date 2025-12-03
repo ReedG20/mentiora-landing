@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +11,7 @@ import {
   ChartHistogramIcon,
   GraduationScrollIcon,
 } from "@hugeicons/core-free-icons";
+import { useEffect, useRef, useState } from "react";
 
 const subjects = [
   { emoji: "🧬", name: "Biology" },
@@ -34,40 +37,72 @@ const examBoards = [
 ];
 
 export default function Home() {
+  const [showNavCTA, setShowNavCTA] = useState(false);
+  const heroCtaRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Show nav CTA when hero CTA is NOT visible
+        setShowNavCTA(!entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px",
+      }
+    );
+
+    const currentRef = heroCtaRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b">
+      <header className="sticky top-0 z-50 w-full bg-background backdrop-blur bg-background/80 supports-backdrop-filter:bg-background/80">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <HugeiconsIcon icon={GraduationScrollIcon} className="size-6" />
             <span className="text-lg font-semibold">Mentiora</span>
           </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Button variant="ghost">About Us</Button>
-            <Button variant="ghost">Subjects</Button>
-            <Button variant="ghost">Features</Button>
-            <Button variant="ghost">Pricing</Button>
-          </nav>
           <div className="flex items-center gap-2">
-            <Button variant="ghost">Login</Button>
-            <Button>Try Mentiora</Button>
+            <nav className="hidden md:flex items-center gap-2">
+              <Button variant="ghost">About Us</Button>
+              <Button variant="ghost">Subjects</Button>
+              <Button variant="ghost">Features</Button>
+              <Button variant="ghost">Pricing</Button>
+            </nav>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost">Login</Button>
+              {showNavCTA && <Button>Try Mentiora</Button>}
+            </div>
           </div>
         </div>
       </header>
 
       <main>
         {/* Hero Section */}
-        <section className="py-24 px-4">
+        <section className="py-40 px-4">
           <div className="container mx-auto text-center max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Your revision, finally made personal
+              Your revision,<br />
+              finally made <em>personal</em>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Personalised GCSE & A-Level revision built to help you reach your
-              best results.
+              Personalised GCSE & A-Level revision<br />
+              built to help you reach your best results.
             </p>
-            <Button size="lg">Try now for free</Button>
+            <Button ref={heroCtaRef} className="h-12 px-6 text-lg">
+              Try now for free
+            </Button>
           </div>
         </section>
 

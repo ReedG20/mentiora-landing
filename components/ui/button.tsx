@@ -82,8 +82,12 @@ function Button({
     asChild?: boolean
   }) {
   const Comp = asChild ? Slot : "button"
-  const buttonClasses = cn(buttonBaseVariants({ variant, size, className }))
-  const squircleClasses = cn(buttonBgVariants({ variant, size }))
+  // Extract height classes from className to apply to Squircle wrapper
+  const heightMatch = className?.match(/\bh-\d+/)?.[0]
+  // Remove height from className since it will be applied to Squircle wrapper
+  const classNameWithoutHeight = className?.replace(/\bh-\d+/g, '').trim() || undefined
+  const buttonClasses = cn(buttonBaseVariants({ variant, size, className: classNameWithoutHeight }))
+  const squircleClasses = cn(buttonBgVariants({ variant, size }), heightMatch)
 
   // Don't wrap link variant with Squircle
   if (variant === "link") {
