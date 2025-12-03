@@ -119,4 +119,24 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Apply Instrument Serif only to h1 and h2 */
+  h1, h2 {
+    font-family: var(--font-instrument-serif), serif;
+  }
+  
+  /* Scale Instrument Serif headings to compensate for smaller appearance */
+  /* Increased scale and reduced gap between h1 and h2 */
+  h1 {
+    font-size: calc(2.25rem * 1.25) !important;
+  }
+  
+  @media (min-width: 768px) {
+    h1 {
+      font-size: calc(3rem * 1.25) !important;
+    }
+  }
+  
+  h2 {
+    font-size: calc(2.25rem * 1.2) !important;
+  }
 }
