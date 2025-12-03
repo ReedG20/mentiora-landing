@@ -126,7 +126,7 @@ export default function Home() {
             alt=""
             width={400}
             height={400}
-            className="absolute bottom-0 left-0 w-auto h-[75%] object-contain mix-blend-multiply opacity-85 pointer-events-none select-none mask-[linear-gradient(to_bottom,black_50%,transparent_100%)]"
+            className="absolute bottom-0 left-0 w-auto h-[75%] object-contain mix-blend-multiply opacity-85 pointer-events-none select-none mask-[linear-gradient(to_bottom,black_65%,transparent_100%)]"
             aria-hidden="true"
           />
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
