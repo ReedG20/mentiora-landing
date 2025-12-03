@@ -121,7 +121,7 @@ const examBoards = [
   { name: "OCR", level: "GCSE", logo: "/exams/ocr-logo.webp" },
 ];
 
-const PRIVATE_TUTORING_MONTHLY = 500;
+/* const PRIVATE_TUTORING_MONTHLY = 500;
 const MENTIORA_MONTHLY = 9.99;
 
 function SavingsCalculator() {
@@ -240,14 +240,14 @@ function SavingsCalculator() {
       </CardContent>
     </Card>
   );
-}
+} */
 
 export default function Home() {
   const [showNavCTA, setShowNavCTA] = useState(false);
   const heroCtaRef = useRef<HTMLAnchorElement>(null);
   const featuresRef = useRef<HTMLElement>(null);
   const subjectsRef = useRef<HTMLElement>(null);
-  const pricingRef = useRef<HTMLElement>(null);
+  // const pricingRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -291,14 +291,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Bottom left decorative image */}
-      <Image
+      {/* <Image
         src="/student-glyph-dither.png"
         alt=""
         width={500}
         height={500}
         className="absolute bottom-0 -left-12 pointer-events-none mix-blend-multiply hidden lg:block"
         aria-hidden="true"
-      />
+      /> */}
       {/* Header */}
       <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -309,7 +309,7 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-2">
               <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => featuresRef.current?.scrollIntoView({ behavior: "smooth" })}>Features</Button>
               <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => subjectsRef.current?.scrollIntoView({ behavior: "smooth" })}>Subjects</Button>
-              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => pricingRef.current?.scrollIntoView({ behavior: "smooth" })}>Pricing</Button>
+              {/* <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5" onClick={() => pricingRef.current?.scrollIntoView({ behavior: "smooth" })}>Pricing</Button> */}
             </nav>
             <div className="flex items-center gap-2">
               <Button asChild variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">
@@ -397,7 +397,7 @@ export default function Home() {
               <p className="text-xl text-muted-foreground leading-normal">
                 <TypingAnimation
                   className="leading-normal"
-                  typeSpeed={50}
+                  typeSpeed={35}
                   delay={600}
                   loop={false}
                   startOnView={true}
@@ -408,8 +408,8 @@ export default function Home() {
                 <br />
                 <TypingAnimation
                   className="leading-normal"
-                  typeSpeed={50}
-                  delay={2700}
+                  typeSpeed={35}
+                  delay={1900}
                   loop={false}
                   startOnView={true}
                   showCursor={false}
@@ -752,7 +752,7 @@ export default function Home() {
         </section>
 
         {/* Pricing Section */}
-        <section ref={pricingRef} className="py-24 px-4">
+        {/* <section ref={pricingRef} className="py-24 px-4">
           <div className="container mx-auto max-w-3xl">
             <motion.div 
               className="text-center mb-16"
@@ -784,7 +784,7 @@ export default function Home() {
               <SavingsCalculator />
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         {/* Final CTA */}
         <motion.section 
