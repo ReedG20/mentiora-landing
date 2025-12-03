@@ -3,14 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { Marquee } from "@/components/ui/marquee";
+import { Slider } from "@/components/ui/slider";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import {
   BookOpen02Icon,
   Message01Icon,
-  ChartHistogramIcon,
+  ChartUpIcon,
   ArrowUpRight01Icon,
   ArrowRight02Icon,
 } from "@hugeicons/core-free-icons";
@@ -21,20 +21,20 @@ import Logo from "@/components/ui/logo";
 import UnicornScene from "unicornstudio-react";
 
 const subjects = [
-  { emoji: "🧬", name: "Biology" },
-  { emoji: "🧪", name: "Chemistry" },
-  { emoji: "🧲", name: "Physics" },
-  { emoji: "📐", name: "Maths" },
-  { emoji: "✍️", name: "English Language" },
-  { emoji: "📖", name: "English Literature" },
-  { emoji: "💻", name: "Computer Science" },
-  { emoji: "🌍", name: "Geography" },
-  { emoji: "⏳", name: "History" },
-  { emoji: "🧠", name: "Psychology" },
-  { emoji: "💼", name: "Business" },
-  { emoji: "⛪", name: "Religious Studies" },
-  { emoji: "🔬", name: "Combined Science" },
-  { emoji: "🇪🇸", name: "Spanish" },
+  { name: "Biology" },
+  { name: "Chemistry" },
+  { name: "Physics" },
+  { name: "Maths" },
+  { name: "English Language" },
+  { name: "English Literature" },
+  { name: "Computer Science" },
+  { name: "Geography" },
+  { name: "History" },
+  { name: "Psychology" },
+  { name: "Business" },
+  { name: "Religious Studies" },
+  { name: "Combined Science" },
+  { name: "Spanish" },
 ];
 
 const examBoards = [
@@ -42,6 +42,127 @@ const examBoards = [
   { name: "Edexcel", level: "GCSE & IGCSE" },
   { name: "OCR", level: "GCSE" },
 ];
+
+const PRIVATE_TUTORING_MONTHLY = 500;
+const MENTIORA_MONTHLY = 9.99;
+
+function SavingsCalculator() {
+  const [months, setMonths] = useState(6);
+
+  const privateTutoringCost = PRIVATE_TUTORING_MONTHLY * months;
+  const mentioraCost = MENTIORA_MONTHLY * months;
+  const savings = privateTutoringCost - mentioraCost;
+  const savingsPercentage = Math.round((savings / privateTutoringCost) * 100);
+
+  return (
+    <Card className="overflow-hidden">
+      <CardContent className="pt-10">
+        {/* Total Savings Display */}
+        <div className="text-center mb-10">
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground mb-2">
+            TOTAL SAVINGS
+          </p>
+          <motion.p
+            key={savings}
+            initial={{ scale: 0.95, opacity: 0.5 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-5xl md:text-6xl font-bold text-primary"
+            style={{ fontFamily: "var(--font-geist-sans)" }}
+          >
+            £{savings.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </motion.p>
+          <p className="text-muted-foreground mt-2">
+            over {months} month{months !== 1 ? "s" : ""}
+          </p>
+        </div>
+
+        {/* Slider Section */}
+        <div className="max-w-lg mx-auto mb-10 px-4">
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-sm font-medium">How many months will you study?</p>
+            <motion.span
+              key={months}
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              className="text-xl font-bold text-primary"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              {months}
+            </motion.span>
+          </div>
+          <Slider
+            value={[months]}
+            onValueChange={(value) => setMonths(value[0])}
+            min={1}
+            max={12}
+            step={1}
+            className="w-full"
+          />
+          <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+            <span>1 month</span>
+            <span>12 months</span>
+          </div>
+        </div>
+
+        {/* Cost Comparison Cards */}
+        <div className="grid md:grid-cols-3 gap-4">
+          {/* Private Tutoring */}
+          <div className="rounded-xl p-5 bg-red-50 border-2 border-red-100">
+            <p className="text-sm font-semibold text-red-600 mb-2">Private Tutoring</p>
+            <motion.p
+              key={privateTutoringCost}
+              initial={{ opacity: 0.5 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-bold text-foreground"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              £{privateTutoringCost.toLocaleString("en-GB")}
+            </motion.p>
+            <p className="text-sm text-muted-foreground mt-1">
+              £{PRIVATE_TUTORING_MONTHLY}/month × {months}
+            </p>
+          </div>
+
+          {/* Mentiora */}
+          <div className="rounded-xl p-5 bg-blue-50 border-2 border-blue-100">
+            <div className="flex items-center gap-2 mb-2">
+              <p className="text-sm font-semibold text-primary">Mentiora</p>
+            </div>
+            <motion.p
+              key={mentioraCost}
+              initial={{ opacity: 0.5 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-bold text-foreground"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              £{mentioraCost.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </motion.p>
+            <p className="text-sm text-muted-foreground mt-1">
+              £{MENTIORA_MONTHLY}/month × {months}
+            </p>
+          </div>
+
+          {/* You Save */}
+          <div className="rounded-xl p-5 bg-blue-50/50 border-2 border-blue-100/50">
+            <p className="text-sm font-semibold text-primary mb-2">You Save</p>
+            <motion.p
+              key={savings}
+              initial={{ opacity: 0.5 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-bold text-foreground"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            >
+              £{savings.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </motion.p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {savingsPercentage}% cheaper
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 export default function Home() {
   const [showNavCTA, setShowNavCTA] = useState(false);
@@ -97,7 +218,7 @@ export default function Home() {
         alt=""
         width={500}
         height={500}
-        className="absolute bottom-0 -left-12 pointer-events-none mix-blend-multiply"
+        className="absolute bottom-0 -left-12 pointer-events-none mix-blend-multiply hidden lg:block"
         aria-hidden="true"
       />
       {/* Header */}
@@ -138,7 +259,7 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section className="relative py-40 px-4 overflow-hidden">
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 hidden lg:block">
             <UnicornScene
               projectId="3RcPyrOTK97Anc0TNg0i"
               width="100%"
@@ -163,9 +284,21 @@ export default function Home() {
               Personalised GCSE & A-Level revision<br />
               built to help you reach your best results.
             </p>
-            <Button ref={heroCtaRef} size="xl">
+            <Button ref={heroCtaRef} size="xl" className="px-6">
               Try now for free
-              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+              <motion.span
+                animate={{
+                  x: [0, 3, 0],
+                  y: [0, -3, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+              </motion.span>
             </Button>
           </div>
         </section>
@@ -224,7 +357,7 @@ export default function Home() {
         <section ref={featuresRef} className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">How Mentiora Works</h2>
+              <h2 className="text-3xl font-bold mb-4">how mentiora works</h2>
               <p className="text-muted-foreground text-lg">
                 Everything you need to revise smarter, not harder.
               </p>
@@ -235,7 +368,7 @@ export default function Home() {
                   <div className="mb-2">
                     <HugeiconsIcon icon={BookOpen02Icon} className="size-8" />
                   </div>
-                  <CardTitle>Practice Real Exam Questions</CardTitle>
+                  <CardTitle>practice real exam questions</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
@@ -250,7 +383,7 @@ export default function Home() {
                   <div className="mb-2">
                     <HugeiconsIcon icon={Message01Icon} className="size-8" />
                   </div>
-                  <CardTitle>Get Unstuck, Instantly</CardTitle>
+                  <CardTitle>get unstuck, instantly</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
@@ -263,9 +396,9 @@ export default function Home() {
               <Card>
                 <CardHeader>
                   <div className="mb-2">
-                    <HugeiconsIcon icon={ChartHistogramIcon} className="size-8" />
+                    <HugeiconsIcon icon={ChartUpIcon} className="size-8" />
                   </div>
-                  <CardTitle>Watch Your Grade Improve</CardTitle>
+                  <CardTitle>watch your grade improve</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
@@ -280,11 +413,14 @@ export default function Home() {
         </section>
 
         {/* Subjects Section */}
-        <section ref={subjectsRef} className="py-24 px-4 bg-muted/50">
+        <section ref={subjectsRef} className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4">
-                Study what actually gets marks.
+                study what{" "}
+<Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
+                    actually gets marks.
+                  </Highlighter>
               </h2>
               <p className="text-muted-foreground text-lg">
                 Aligned to your exact exam board. No filler. No wasted time.
@@ -293,7 +429,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <h3 className="text-xl font-semibold mb-6">
-                  Exam Boards We Support
+                  exam boards we support
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {examBoards.map((board) => (
@@ -308,12 +444,12 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-6">
-                  Subjects Available
+                  subjects available
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {subjects.map((subject) => (
                     <Badge key={subject.name} variant="secondary">
-                      {subject.emoji} {subject.name}
+                      {subject.name}
                     </Badge>
                   ))}
                 </div>
@@ -327,7 +463,10 @@ export default function Home() {
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4">
-                A learning system that never stops improving
+                a learning system that{" "}
+<Highlighter action="underline" color="#FF99D9" strokeWidth={2.5} isView>
+                    never stops improving
+                  </Highlighter>
               </h2>
               <p className="text-muted-foreground text-lg">
                 Every question you answer makes Mentiora smarter about how you
@@ -339,7 +478,7 @@ export default function Home() {
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   1
                 </div>
-                <h3 className="text-xl font-semibold mb-2">You Study</h3>
+                <h3 className="text-xl font-semibold mb-2">you study</h3>
                 <p className="text-muted-foreground">
                   Answer questions and get instant feedback
                 </p>
@@ -348,7 +487,7 @@ export default function Home() {
                 <div className="inline-flex items-center justify-center size-12 rounded-full bg-primary text-primary-foreground text-xl font-bold mb-4">
                   2
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Mentiora Analyzes</h3>
+                <h3 className="text-xl font-semibold mb-2">mentiora analyzes</h3>
                 <p className="text-muted-foreground">
                   We track 50+ data points from every answer
                 </p>
@@ -358,7 +497,7 @@ export default function Home() {
                   3
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  You Get Personalized Results
+                  you get personalized results
                 </h3>
                 <p className="text-muted-foreground">
                   Three features that adapt to you in real-time
@@ -369,44 +508,15 @@ export default function Home() {
         </section>
 
         {/* Pricing Section */}
-        <section ref={pricingRef} className="py-24 px-4 bg-muted/50">
+        <section ref={pricingRef} className="py-24 px-4">
           <div className="container mx-auto max-w-3xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">Calculate your savings</h2>
+              <h2 className="text-3xl font-bold mb-4">calculate your savings</h2>
               <p className="text-muted-foreground text-lg">
                 See how much you&apos;ll save compared to private tutoring
               </p>
             </div>
-            <Card>
-              <CardContent className="pt-6">
-                <div className="grid md:grid-cols-3 gap-6 text-center">
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      Private Tutoring
-                    </p>
-                    <p className="text-2xl font-bold">£500/month</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      Mentiora
-                    </p>
-                    <p className="text-2xl font-bold">£9.99/month</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      You Save
-                    </p>
-                    <p className="text-2xl font-bold text-green-600">
-                      98% cheaper
-                    </p>
-                  </div>
-                </div>
-                <Separator className="my-6" />
-                <div className="text-center">
-                  <Button size="lg">Start saving today</Button>
-                </div>
-              </CardContent>
-            </Card>
+            <SavingsCalculator />
           </div>
         </section>
 
@@ -414,14 +524,26 @@ export default function Home() {
         <section className="py-24 px-4">
           <div className="container mx-auto text-center max-w-3xl">
             <h2 className="text-3xl font-bold mb-4">
-              Start your journey to better grades
+              start your journey to better grades
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
               Join thousands of students already improving with Mentiora
             </p>
-            <Button size="xl">
+            <Button size="xl" className="px-6">
               Try now for free
-              <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+              <motion.span
+                animate={{
+                  x: [0, 3, 0],
+                  y: [0, -3, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+              </motion.span>
             </Button>
           </div>
         </section>
