@@ -82,13 +82,13 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2">
             <nav className="hidden md:flex items-center gap-2">
-              <Button variant="ghost">About Us</Button>
-              <Button variant="ghost">Subjects</Button>
-              <Button variant="ghost">Features</Button>
-              <Button variant="ghost">Pricing</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">About Us</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Subjects</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Features</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Pricing</Button>
             </nav>
             <div className="flex items-center gap-2">
-              <Button variant="ghost">Login</Button>
+              <Button variant="ghost" className="hover:bg-black/5 hover:text-foreground dark:hover:bg-white/5">Login</Button>
               <AnimatePresence>
                 {showNavCTA && (
                   <motion.div
@@ -119,6 +119,15 @@ export default function Home() {
             squares={[50, 15]}
             className="opacity-50 mask-[radial-gradient(ellipse_at_center,white_20%,transparent_70%)]"
             squaresClassName="stroke-muted-foreground/20 hover:fill-muted-foreground/10"
+          />
+          {/* Student glyph - bottom left */}
+          <Image
+            src="/student-glyph-dither.png"
+            alt=""
+            width={400}
+            height={400}
+            className="absolute bottom-0 left-0 w-auto h-[75%] object-contain mix-blend-multiply opacity-85 pointer-events-none select-none mask-[linear-gradient(to_bottom,black_50%,transparent_100%)]"
+            aria-hidden="true"
           />
           <div className="container relative z-10 mx-auto text-center max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
