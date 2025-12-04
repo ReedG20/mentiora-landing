@@ -413,27 +413,34 @@ export default function Home() {
                   className="mb-8"
                 >
                   <p className="text-xl text-muted-foreground leading-normal">
-                    <TypingAnimation
-                      className="leading-normal"
-                      typeSpeed={35}
-                      delay={600}
-                      loop={false}
-                      startOnView={true}
-                      showCursor={false}
-                    >
-                      Personalised GCSE & A-Level revision
-                    </TypingAnimation>
-                    <br />
-                    <TypingAnimation
-                      className="leading-normal"
-                      typeSpeed={35}
-                      delay={1900}
-                      loop={false}
-                      startOnView={true}
-                      showCursor={false}
-                    >
-                      built to help you reach your best results.
-                    </TypingAnimation>
+                    <span className="block">
+                      <TypingAnimation
+                        className="leading-normal"
+                        typeSpeed={35}
+                        delay={600}
+                        loop={false}
+                        startOnView={true}
+                        showCursor={false}
+                      >
+                        Personalised GCSE & A-Level revision
+                      </TypingAnimation>
+                    </span>
+                    <span className="block relative">
+                      {/* Invisible placeholder to reserve space and prevent layout shift */}
+                      <span className="invisible" aria-hidden="true">built to help you reach your best results.</span>
+                      <span className="absolute inset-0">
+                        <TypingAnimation
+                          className="leading-normal"
+                          typeSpeed={35}
+                          delay={1900}
+                          loop={false}
+                          startOnView={true}
+                          showCursor={false}
+                        >
+                          built to help you reach your best results.
+                        </TypingAnimation>
+                      </span>
+                    </span>
                   </p>
                 </motion.div>
                 <motion.div
@@ -442,24 +449,31 @@ export default function Home() {
                   transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.8 }}
                   className="flex justify-center lg:justify-start"
                 >
-                  <Button asChild size="xl" className="px-6">
-                    <a href="https://www.mentiora.com/register" ref={heroCtaRef}>
-                      Try now for free
-                      <motion.span
-                        animate={{
-                          x: [0, 3, 0],
-                          y: [0, -3, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
-                      </motion.span>
-                    </a>
-                  </Button>
+                  <div className="relative">
+                    {/* Blue blur glow behind button */}
+                    <div 
+                      className="absolute inset-0 bg-primary/60 blur-lg rounded-full scale-85 translate-y-2"
+                      aria-hidden="true"
+                    />
+                    <Button asChild size="xl" className="px-6 relative">
+                      <a href="https://www.mentiora.com/register" ref={heroCtaRef}>
+                        Try now for free
+                        <motion.span
+                          animate={{
+                            x: [0, 3, 0],
+                            y: [0, -3, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        >
+                          <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                        </motion.span>
+                      </a>
+                    </Button>
+                  </div>
                 </motion.div>
               </div>
             </div>
