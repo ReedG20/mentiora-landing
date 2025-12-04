@@ -34,6 +34,7 @@ import { Highlighter } from "@/components/ui/highlighter";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import Logo from "@/components/ui/logo";
 import { TypingAnimation } from "@/components/ui/typing-animation";
+import { Safari } from "@/components/ui/safari";
 // import UnicornScene from "unicornstudio-react";
 
 // Animation variants
@@ -341,20 +342,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative py-40 px-4 overflow-hidden">
-          {/* <div className="absolute inset-0 z-0 hidden lg:block">
-            <UnicornScene
-              projectId="3RcPyrOTK97Anc0TNg0i"
-              width="100%"
-              height="100%"
-              scale={1}
-              dpi={1.5}
-              lazyLoad={true}
-              altText="Mentiora hero background"
-            />
-            Cover Unicorn Studio watermark
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[220px] h-[80px] bg-white z-10" />
-          </div> */}
+        <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
           {/* Interactive Grid Pattern overlay with radial fade */}
           <div className="absolute inset-0 z-1 flex items-center justify-center overflow-hidden mask-[radial-gradient(ellipse_at_center,white,transparent_70%)]">
             <InteractiveGridPattern
@@ -365,95 +353,116 @@ export default function Home() {
               squaresClassName="stroke-gray-400/30 hover:fill-primary/10"
             />
           </div>
-          <div className="container relative z-10 mx-auto text-center max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.2 }}
-              className="mb-3 flex justify-center"
-            >
-              <span className="inline-flex items-center justify-center rounded-full border bg-white shadow-md hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-1.5 text-sm font-medium gap-3">
-                <div className="rounded-full bg-red-500 size-2"></div>
-                Mentiora 2.0 is here!
-              </span>
-            </motion.div>
-            <motion.h1 
-              className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-            >
-              {["your ", "revision,"].map((word, i) => (
-                <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
-                  {word}
-                </motion.span>
-              ))}
-              <br />
-              {["finally ", "made "].map((word, i) => (
-                <motion.span key={i + 2} variants={wordAnimation} className="inline-block whitespace-pre">
-                  {word}
-                </motion.span>
-              ))}
-              <motion.span variants={wordAnimation} className="inline-block">
-                <Highlighter action="highlight" color="#FF99D9" isView delay={900}>
-                  <em>personal</em>
-                </Highlighter>
-              </motion.span>
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.55 }}
-              className="mb-8"
-            >
-              <p className="text-xl text-muted-foreground leading-normal">
-                <TypingAnimation
-                  className="leading-normal"
-                  typeSpeed={35}
-                  delay={600}
-                  loop={false}
-                  startOnView={true}
-                  showCursor={false}
+          
+          <div className="container relative z-10 mx-auto px-4">
+            <div className="flex items-center">
+              {/* Safari mockup on the left - cut off by the left edge */}
+              <motion.div 
+                className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 w-[70%] -ml-[19%]"
+                style={{ filter: "drop-shadow(0 6px 8px rgba(0, 0, 0, 0.08))" }}
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1], delay: 0.4 }}
+              >
+                <Safari 
+                  url="mentiora.com"
+                  imageSrc="/app-screenshot.png"
+                />
+              </motion.div>
+              
+              {/* Hero content pushed to the right */}
+              <div className="w-full lg:w-[45%] lg:ml-auto lg:pl-2 text-center lg:text-left max-w-xl mx-auto lg:mx-0">
+                <motion.div
+                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.2 }}
+                  className="mb-3 flex justify-center lg:justify-start"
                 >
-                  Personalised GCSE & A-Level revision
-                </TypingAnimation>
-                <br />
-                <TypingAnimation
-                  className="leading-normal"
-                  typeSpeed={35}
-                  delay={1900}
-                  loop={false}
-                  startOnView={true}
-                  showCursor={false}
+                  <span className="inline-flex items-center justify-center rounded-full border bg-white shadow-md hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-1.5 text-sm font-medium gap-3">
+                    <div className="rounded-full bg-red-500 size-2"></div>
+                    Mentiora 2.0 is here!
+                  </span>
+                </motion.div>
+                <motion.h1 
+                  className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
+                  initial="hidden"
+                  animate="visible"
+                  variants={staggerContainer}
                 >
-                  built to help you reach your best results.
-                </TypingAnimation>
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.8 }}
-            >
-              <Button asChild size="xl" className="px-6">
-                <a href="https://www.mentiora.com/register" ref={heroCtaRef}>
-                  Try now for free
-                  <motion.span
-                    animate={{
-                      x: [0, 3, 0],
-                      y: [0, -3, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                  {["your ", "revision,"].map((word, i) => (
+                    <motion.span key={i} variants={wordAnimation} className="inline-block whitespace-pre">
+                      {word}
+                    </motion.span>
+                  ))}
+                  <br />
+                  {["finally ", "made "].map((word, i) => (
+                    <motion.span key={i + 2} variants={wordAnimation} className="inline-block whitespace-pre">
+                      {word}
+                    </motion.span>
+                  ))}
+                  <motion.span variants={wordAnimation} className="inline-block">
+                    <Highlighter action="highlight" color="#FF99D9" isView delay={900}>
+                      <em>personal</em>
+                    </Highlighter>
                   </motion.span>
-                </a>
-              </Button>
-            </motion.div>
+                </motion.h1>
+                <motion.div
+                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.55 }}
+                  className="mb-8"
+                >
+                  <p className="text-xl text-muted-foreground leading-normal">
+                    <TypingAnimation
+                      className="leading-normal"
+                      typeSpeed={35}
+                      delay={600}
+                      loop={false}
+                      startOnView={true}
+                      showCursor={false}
+                    >
+                      Personalised GCSE & A-Level revision
+                    </TypingAnimation>
+                    <br />
+                    <TypingAnimation
+                      className="leading-normal"
+                      typeSpeed={35}
+                      delay={1900}
+                      loop={false}
+                      startOnView={true}
+                      showCursor={false}
+                    >
+                      built to help you reach your best results.
+                    </TypingAnimation>
+                  </p>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.8 }}
+                  className="flex justify-center lg:justify-start"
+                >
+                  <Button asChild size="xl" className="px-6">
+                    <a href="https://www.mentiora.com/register" ref={heroCtaRef}>
+                      Try now for free
+                      <motion.span
+                        animate={{
+                          x: [0, 3, 0],
+                          y: [0, -3, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-6" strokeWidth={1.75} />
+                      </motion.span>
+                    </a>
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
